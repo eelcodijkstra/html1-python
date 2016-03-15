@@ -35,17 +35,17 @@ class Index:
 
 class Form1:
     def GET(self):
-        return("GET " + str(web.input))
+        return("GET " + str(web.input()))
 
     def POST(self):
-        return("POST " + str(web.input))
+        return("POST " + str(web.input()))
 
 class Form2:
     def GET(self):
-        return("GET " + str(web.input))
+        return("GET " + str(web.input())
 
     def POST(self):
-        return("POST " + str(web.input))
+        return("POST " + str(web.input()))
 
 if __name__=='__main__':
     app.run()
