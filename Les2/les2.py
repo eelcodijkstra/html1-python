@@ -42,7 +42,7 @@ class Form1:
 
 class Form2:
     def GET(self):
-        return("GET " + str(web.input())
+        return("GET " + str(web.input()))
 
     def POST(self):
         return("POST " + str(web.input()))
