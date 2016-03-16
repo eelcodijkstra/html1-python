@@ -16,10 +16,12 @@ class Index:
 
 class Form1:
     def GET(self):
-        return("GET " + str(web.input()))
+        input = web.input()
+        return render.form1(method="GET", x=input.a, y=input.y)
 
     def POST(self):
-        return("POST " + str(web.input()))
+        input = web.input()
+        return render.form1(method="POST", x=input.a, y=input.y)
 
 class Form2:
     def GET(self):
