@@ -25,10 +25,12 @@ class Form1:
 
 class Form2:
     def GET(self):
-        return render.form1(method="GET", input=web.input())
+        return render.form2(method="GET", input=web.input())
 
     def POST(self):
-        return render.form1(method="POST", input=web.input())
+        inputx = web.input()
+        print(inputx.keys())
+        return render.form2(method="POST", input=inputx)
 
 if __name__=='__main__':
     app.run()
