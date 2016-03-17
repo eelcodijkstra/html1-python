@@ -46,3 +46,7 @@ We hebben als oefening een eenvoudige webpagina gemaakt met een formulier. De we
 
 Opdracht: breidt de webpagina uit: voeg een tweede formulier toe aan deze webpagina.
  
+Merk op dat bij de GET-opdracht de URL in de browser de parameters weergeeft in de URL.
+
+Merk op: je kunt ook parameters meegeven in een link.
+
