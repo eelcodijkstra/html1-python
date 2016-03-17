@@ -43,6 +43,7 @@ Opdracht: gebruik cookies om de naam van de gebruiker te onthouden. Deze wordt g
 ### Gebruikers (users)
 
 
+
 ### Sessies (sessions)
 
 Cookies worden vaak gebruikt om de gegevens van een sessie bij te houden. Web.py heeft voor deze speciale vorm van gebruik extra voorzieningen.
