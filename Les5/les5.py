@@ -1,4 +1,5 @@
 import web
+import pymongo
 
 urls = (
     '/','Index',
@@ -11,6 +12,9 @@ urls = (
 app = web.application(urls,globals())
 
 render = web.template.render('templates/')
+
+client = pymongo.MongoClient()
+db = client["tododb"]
 
 class Index:
     def GET(self):
