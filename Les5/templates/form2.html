@@ -1,0 +1,15 @@
+$def with (method, input)
+<!doctype html>
+<html>
+  <head> <title>Form2 result</title>
+  </head>
+  <body>
+    <p>
+      method: $method <br>
+      $for key in input.keys():
+        <em> $key </em>: $input[key] <br>
+    </p>
+    <hr>
+    <a href="/">Home</a>
+  </body>
+</html>
