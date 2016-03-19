@@ -95,3 +95,18 @@ Vanuit een formulier kunnen we alleen `GET` en `POST` gebruiken. Dit betekent da
 
 > In een volgende module maken we gebruik van de mogelijkheden van AJAX. In dat geval kunnen we wel de normale afspraken gebruiken.
 
+### Todo-voorbeeld
+
+Een todo-element bestaat uit:
+
+* een beschrijving (string)
+* een boolean "done"
+
+Om een dergelijk element te kunnen onderscheiden in een lijst, voegen we er nog een identificatie aan toe.
+
+Bij de todo-list gebruiken we een form voor elk todo-element, zodat we dit element kunnen veranderen: de gebruiker kan de beschrijving aanpassen, of het element "done" maken.
+
+> In een latere versie willen we ook elementen kunnen verwijderen.
+
+We beginnen met een formulier voor het aanmaken van een nieuw element.
+

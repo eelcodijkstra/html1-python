@@ -44,14 +44,24 @@ class TodoElement:
         return "GET TodoElement " + str(id)
 
     def POST(self, id):
+        data = web.input()
+        todoElt = {"description": data.descr,
+                   "done": data.done}
         return "POST TodoElement " + str(id)
 
 class TodoList:
     def GET(self):
-        return "GET TodoList"
+        todos = db.todos.find()
+        return render.todos(todolist=todos)
 
     def POST(self):
-        return "POST todoList"
+        data = web.input()
+        db.todos.insert_one(
+          {"description": data.descr,
+           "done": data.done}
+        )
+        todos = db.todos.find()
+        return render.todos(todolist=todos)
 
 if __name__=='__main__':
     app.run()
