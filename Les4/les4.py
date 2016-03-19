@@ -12,8 +12,8 @@ render = web.template.render('templates/')
 
 class Index:
     def GET(self):
-        user = web.cookies(username="anonymous")
-        return render.index(username=user)
+        cookies = web.cookies(username="anonymous")
+        return render.index(username=cookies.username)
 
 class Form1:
     def GET(self):
@@ -31,6 +31,7 @@ class Form2:
     def POST(self):
         inputx = web.input()
         print(inputx.keys())
+        web.setcookie("username", inputx.username)
         return render.form2(method="POST", input=inputx)
 
 if __name__=='__main__':
