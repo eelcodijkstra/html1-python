@@ -13,3 +13,10 @@
 * les 9:
 * les 10:
 
+Welke voorbeelden gebruiken we in de verschillende lessen?
+
+* todo's
+     * eerst: zonder users, globale lijst van todo's
+     * dan: met users, lijst van todo's per gebruiker
+     
+Voor de globale lijst van todo's hebben we een database nodig, en een redelijk ontworpen interface.

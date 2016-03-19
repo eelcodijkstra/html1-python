@@ -8,6 +8,10 @@ Er zijn allerlei verschillende soorten databases in gebruik. Relationele databas
 
 De wachtwoorden van de gebruikers moet je bij de server opslaan. Dit is een eerste voorbeeld van persistente data.
 
+In dit voorbeeld maken we een todo-lijst, die we opslaan bij de server. In de eerste versie hiervan maken we nog geen onderscheid tussen gebruikers.
+
+> In een volgende versie houden we een lijst bij per gebruiker. Moeten we de gebruiker dan ook vermelden in het REST-interface, of laten we dat impliciet - via de headers/cookies? Een argument voor het laatste is dat een gebruiker niet de todo van een andere gebruiker kan opvragen. Een argument tegen het laatste is dat we dan geen uniek interface hebben voor de afzonderelijke elementen.
+
 ### MongoDB
 
 Voordat we een MongoDB database kunnen gebruiken, moeten we eerst de bijbehorende library importeren:
@@ -71,4 +75,23 @@ In dit geval moeten we afzonderlijke tabellen gebruiken voor de gebruikers en vo
 
 
 
+### CRUD
+
+Bij een database spreken we vaak over CRUD: create, read, update, delete. De verschillende documenten (objecten, e.d.) die we willen opslaan moeten we kunnen aanmaken, aanpassen, en verwijderen.
+
+Het kan handig zijn om ook het interface van de server op deze manier vorm te geven. 
+
+Voor een REST interface worden meestal de volgende afspraken gebruikt:
+
+| resource  | POST           | GET          | PUT            | DELETE  |
+| :---      | :---           | :---         | :---           | :---    |
+| todos     | create element | read list    | update list    | delete list |
+| todos/123 |   ---          | read element | update element | delete element |
+
+Vanuit een formulier kunnen we alleen `GET` en `POST` gebruiken. Dit betekent dat we voor ons voorbeeld een kleine variatie gebruiken:
+
+* we gebruiken `POST todos/123` voor een update van element `123`.
+* we gebruiken een extra boolean input in het formulier `delete`, voor het verwijderen van een element: `POST todos/123?delete=true`
+
+> In een volgende module maken we gebruik van de mogelijkheden van AJAX. In dat geval kunnen we wel de normale afspraken gebruiken.
 
