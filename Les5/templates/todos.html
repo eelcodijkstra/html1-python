@@ -4,15 +4,12 @@ $def with (todolist)
   <head> <title>Forms test</title>
   </head>
   <body>
-    <p>
-      $if username != "anonymous":
-          <p>Welkom $username!</p>
     $for elt in todolist:
-      <form action="/todos/ + $elt.id" method="POST">
+      <form action="/todos/$elt['_id']" method="POST">
        <input type="checkbox" name="done" value="True"
-              $if elt.done: checked
+              $if elt['done']: checked
               >
-       <input type="text" name="descr" value="$elt.description">
+       <input type="text" name="descr" value="$elt['description']">
        <button type="submit">change</button>
         <br>
       </form>

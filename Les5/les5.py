@@ -1,12 +1,13 @@
 import web
 import pymongo
+from bson.objectid import ObjectId
 
 urls = (
     '/','Index',
     '/form1','Form1',
     '/form2', 'Form2',
     '/todos', 'TodoList',
-    '/todos/(\d+)', 'TodoElement'
+    '/todos/([0-9a-f]+)', 'TodoElement'
 )
 
 app = web.application(urls,globals())
@@ -45,9 +46,19 @@ class TodoElement:
 
     def POST(self, id):
         data = web.input()
-        todoElt = {"description": data.descr,
-                   "done": data.done}
-        return "POST TodoElement " + str(id)
+        if not ("done" in data.keys()):
+            data["done"] = False
+        print(data)
+        print("id:" + id)
+        db.todos.update_one(
+                {"_id": ObjectId(id)},
+                {"$set": {"description": data.descr,
+                           "done": data.done}}
+            )
+        print("POST TodoElement " + str(id))
+        raise web.seeother("/todos")
+#        todos = db.todos.find()
+#        return render.todos(todolist=todos)
 
 class TodoList:
     def GET(self):
@@ -56,6 +67,8 @@ class TodoList:
 
     def POST(self):
         data = web.input()
+        if not ("done" in data.keys()):
+            data["done"] = False        
         db.todos.insert_one(
           {"description": data.descr,
            "done": data.done}
