@@ -1,0 +1,17 @@
+$def with (username, userid)
+<!doctype html>
+<html>
+  <head> <title>User form</title>
+  </head>
+  <body>
+    <p>
+      $if username != "anonymous":
+          <p>Welkom $username!</p>
+          <a href="/users/$userid/todos">Your todo-list</a>
+    <form action="/users" method="GET">
+      username: <input type="text" name="username" value=""> <br>
+      <button type="submit">Submit</button>
+    </form>
+    <hr>
+  </body>
+</html>
