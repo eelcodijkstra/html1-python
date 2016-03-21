@@ -48,14 +48,11 @@ class TodoElement:
         data = web.input()
         if not ("done" in data.keys()):
             data["done"] = False
-        print(data)
-        print("id:" + id)
         db.todos.update_one(
                 {"_id": ObjectId(id)},
                 {"$set": {"description": data.descr,
                            "done": data.done}}
             )
-        print("POST TodoElement " + str(id))
         raise web.seeother("/todos")
 #        todos = db.todos.find()
 #        return render.todos(todolist=todos)

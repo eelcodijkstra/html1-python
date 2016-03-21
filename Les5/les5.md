@@ -110,3 +110,22 @@ Bij de todo-list gebruiken we een form voor elk todo-element, zodat we dit eleme
 
 We beginnen met een formulier voor het aanmaken van een nieuw element.
 
+### Over het gebruik van checkbox
+
+Een todo-element heeft een boolean eigenschap `done`. Deze stellen we in het html-formulier voor door middel van een checkbox. Als een checkbox een attribuut `checked` heeft, is deze aangevinkt; niet-aangevinkt komt overeen met de afwezigheid van dit attribuut.
+
+Bij het omzetten van de boolean waarde vanuit de database moeten we dit `checked` attribuut zetten. (Dit doen we in het template.)
+
+In het http-interface van een opgestuurd formulier komt de waarde van het checkbox-element (het `value`-attribuut) alleen voor als deze checkbox aangevinkt is.
+
+Met andere woorden: de `afwezigheid` van de waarde van het checkbox-element komt overeen met de waarde `False`. We moeten in de server deze omzetting doen, voordat we deze eigenschap in de database kunnen opslaan.
+
+### Redirection
+
+Na het afhandelen van een formulier met een todo, willen we weer terug naar de pagina met de lijst met todo's. Hiervoor kunnen we een redirect gebruiken. In web.py gebruik je daarvoor de constructie:
+
+```
+raise web.seeother(url)
+```
+
+Omdat dit het normale patroon van return/rendering onderbreekt, wordt hiervoor het Python exception mechanisme gebruikt.
