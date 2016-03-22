@@ -35,7 +35,8 @@ class Users:
             web.setcookie("username", data.username)
             user = db.users.find_one({"username": data.username})
             if user == None:
-                userid = db.users.insert_one({"username": data.username})
+                userid = db.users.insert_one(
+                    {"username": data.username}).inserted_id
             else:
                 userid = user["_id"]
             raise web.seeother("/users/" + str(userid) + "/todos")
