@@ -112,13 +112,31 @@ We beginnen met een formulier voor het aanmaken van een nieuw element.
 
 ### Over het gebruik van checkbox
 
-Een todo-element heeft een boolean eigenschap `done`. Deze stellen we in het html-formulier voor door middel van een checkbox. Als een checkbox een attribuut `checked` heeft, is deze aangevinkt; niet-aangevinkt komt overeen met de afwezigheid van dit attribuut.
+De eigenschap "done" van een todo-element heeft verschillende representaties in de html-pagina die naar de browser gestuurd wordt, in het formulier dat naar de server teruggestuurd wordt, en in de database. We moeten deze waarden omzetten op een aantal punten in het programma.
 
-Bij het omzetten van de boolean waarde vanuit de database moeten we dit `checked` attribuut zetten. (Dit doen we in het template.)
+#### Van database naar html
 
-In het http-interface van een opgestuurd formulier komt de waarde van het checkbox-element (het `value`-attribuut) alleen voor als deze checkbox aangevinkt is.
+Een todo-element heeft een boolean eigenschap `done`. Deze stellen we in het html-formulier voor door middel van een checkbox. De aanwezigheid van het attribuut `checked` van een checkbox geeft aan dat dit aangevinkt is; niet-aangevinkt komt overeen met de afwezigheid van dit attribuut.
 
-Met andere woorden: de `afwezigheid` van de waarde van het checkbox-element komt overeen met de waarde `False`. We moeten in de server deze omzetting doen, voordat we deze eigenschap in de database kunnen opslaan.
+Bij het omzetten van de Boolean waarde *vanuit de database* moeten we dit `checked` attribuut zetten. Dit doen we in het template.
+
+```
+$if elt['done']: checked
+```
+
+#### Van formulier naar database
+
+De browser stuur het ingevulde formulier naar de server. De parameter van de checkbox in het http-request heeft het naam/waarde paar van de checkbox als deze aangevinkt is. Als de checkbox niet aangevinkt is, ontbreekt dit naam/waarde-paar in de http-parameters.
+
+In het http-interface van een opgestuurd formulier komt de het naam/waarde-paar waarde van het checkbox-element alleen voor als deze checkbox aangevinkt is. 
+
+In het geval van een checkbox met `name="done" value="True` hebben we dan twee mogelijkheden (met `data = web.input()`) (i) `data["done"] == "True"`; (ii) "done" ontbreekt als key in `data`. Met de volgende formule zetten we dit om in een Boolean waarde:
+
+```
+done = "done" in data.keys()
+```
+
+Deze omzetting doen we voordat we deze waarde in de database opslaan.
 
 ### Redirection
 
@@ -129,3 +147,21 @@ raise web.seeother(url)
 ```
 
 Omdat dit het normale patroon van return/rendering onderbreekt, wordt hiervoor het Python exception mechanisme gebruikt.
+
+### Cleanup
+
+We hebben aan de todo-pagina en aan het server-programma een actie toegevoegd om de voltooide acties te verwijderen uit de database.
+
+In de todo-pagina geven we deze actie weer door middel van een eenvoudige link: als de gebruiker de link aanklikt, wordt het verzoek verstuurd, en wordt de actie uitgevoerd.
+
+> We gebruiker hiervoor een GET-request, omdat er sprake is van een *idempotente* operatie: het maakt niet uit of deze actie eenmaal of vaker uitgevoerd wordt, het resultaat blijft hetzelfde.
+
+> In een interface volgens de REST regels gebruik je hiervoor het http `DELETE` request, maar dit kunnen we niet verzenden via een formulier. Bovendien kunnen we niet zomaar aangeven welke elementen wel of niet verwijderd moeten worden. In de latere module over AJAX (enz.) komen we hierop terug.
+
+### Spaties en lege regels in html
+
+Door het gebruik van templates krijgen we vaak overbodige spaties en regelovergangen in de html-tekst. Voor het weergeven van het resultaat maakt dat geen verschil, maar de html-tekst wordt er minder leesbaar door, en soms ook veel groter: je hebt wel bytes nodig om die spaties weer te geven in het bestand.
+
+Door middel van `\` aan het einde van een regel in een template voorkom je een  regelovergang in de resulterende html-tekst.
+
+Overbodige spaties zijn wat lastiger te voorkomen, ook omdat je rekening moet houden met de layout-regels voor Python.

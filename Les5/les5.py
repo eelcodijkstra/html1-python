@@ -49,7 +49,7 @@ class TodoList:
 
 class Cleanup:
     def GET(self):
-        cnt = db.todos.delete_many({"done": True})
+        db.todos.delete_many({"done": True})
         raise web.seeother("/todos")
 
 if __name__=='__main__':
