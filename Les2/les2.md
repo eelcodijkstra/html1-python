@@ -1,27 +1,32 @@
 ## Les 2: formulieren en het afhandelen daarvan
 
-In deze opdracht ga je oefenen met html-formulieren, en met het afhandelen daarvan door de server. Deze afhandeling is hier nog erg eenvoudig: je stuurt de informatie uit het formulier terug naar de browser.
+In deze opdracht ga je oefenen met html-formulieren en met het afhandelen daarvan door de server. We beginnen erg eenvoudig: de server stuurt de informatie uit het formulier terug naar de browser.
 
 Een volgende stap is om de informatie uit het formulier te gebruiken voor het aanpassen van de inhoud van een webpagina. Daarvoor maken we gebruik van *templates*.
 
 
 ### HTML formulier
 
-Een HTML-formulier is een onderdeel van een HTML-document bedoeld voor interactie met de gebruiker; de informatie die de gebruiker opgeeft in het formulier wordt opgestuurd naar de server.
+Een HTML-formulier is een onderdeel van een HTML-document bedoeld voor interactie met de gebruiker. De gebruiker vult het formulier is, en "submit" dit door op een knop te klikken. De browser stuur de informatie in het formulier op naar de server.
 
 Een HTML-document kan meerdere formulieren bevatten.
 
-We leggen de structuur en werking van een formulier uit aan de hand van een eenvoudig voorbeeld. (Dit voorbeeld geeft niet de volledige mogelijkheden en onderdelen van formulieren weer.)
+We leggen de structuur en werking van een formulier uit aan de hand van een eenvoudig voorbeeld. (We gebruiken hier maar een deel van de mogelijkheden van formulieren.)
 
 ```
 <form action="myform" method="GET">
-  x: <input  name="x" value="123">
-  y: <input ... name="y" value="hi">
+  x: <input  type ="number" name="x" value="123">
+  y: <input type="text" name="y" value="hi">
   <button type="submit">Send</button>
 </form>
 ```
 
-Een formulier kan ook allerlei andere elementen bevatten, bijvoorbeeld om aan te geven wat de betekenis is van de input-elementen.
+Dit formulier bestaat uit:
+
+* de form-attributen `action` en `method`, die aangeven op welke manier de browser de gegevens naar de server moet sturen.
+* een aantal input-elementen; we gebruiken input-elementen van type `number` en van type `text`.
+* html-elementen (hier de teksten `x:` en `y:`), bijvoorbeeld om de betekenis van de input-elementen aan te geven.
+* een submit-button.
 
 De gebruikelijke gang van zaken is:
 
@@ -41,12 +46,10 @@ Opmerkingen:
 
 * de `method` kan zowel `GET` als `POST` zijn. Als je alleen gegevens opvraagt van de server, dan is `GET` gebruikelijk. Je gebruikt `POST` als het de bedoeling is dat de server iets bewaart van de gegevens uit het request. We komen hier later op terug.
 * de parameter-waarde die overgedragen wordt aan de server, is altijd een *strings*, ook al is deze afkomstig van bijvoorbeeld een number-input element. Je moet in de server die string dan eventueel weer omzetten in een getal, een boolean waarde, een datum, enz.
+* bij een GET-opdracht geeft de browser de URL met de parameters weer in het URL-venster. Controleer dit.
 
 We hebben als oefening een eenvoudige webpagina gemaakt met een formulier. De webserver handelt het verzoek af dat binnenkomt als dit formulier ingevuld en opgestuurd wordt ("submit").
 
-Opdracht: breidt de webpagina uit: voeg een tweede formulier toe aan deze webpagina.
- 
-Merk op dat bij de GET-opdracht de URL in de browser de parameters weergeeft in de URL.
+*Opdracht:* breidt de webpagina uit, door een tweede formulier toe te voegen aan deze webpagina.
 
 Merk op: je kunt ook parameters meegeven in een link.
-
