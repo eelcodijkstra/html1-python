@@ -27,3 +27,6 @@ Het is nog steeds mogelijk afzonderlijke todo's te verwerken: de identificatie v
 *Opdracht:* voeg aan de pagina met todo-lijsten de naam van de gebruiker toe.
 Hint: (i) geef deze door als parameter aan het template; (ii) je kunt de naam van de gebruiker ook in de URL opnemen, als parameter (direct; of via een verborgen veld in een formulier).
 
+In de functie `Users.GET` zetten we het cookie `username`. Voor een nieuwe gebruiker zorgen we er ook voor dat deze aan de database toegevoegd wordt. We weten dan altijd zeker dat een naam die we via dit cookie krijgen, in de database bestaat.
+
+(Naamgeving van input-data: consistenter gemaakt.)

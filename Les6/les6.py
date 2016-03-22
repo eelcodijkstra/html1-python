@@ -28,14 +28,14 @@ class Index:
 
 class Users:
     def GET(self):
-        input = web.input()
-        if input.username == "":
+        data = web.input()
+        if data.username == "":
             return render.index(username="", userid=0)
         else:
-            web.setcookie("username", input.username)
-            user = db.users.find_one({"username": input.username})
+            web.setcookie("username", data.username)
+            user = db.users.find_one({"username": data.username})
             if user == None:
-                userid = db.users.insert_one({"username": input.username})
+                userid = db.users.insert_one({"username": data.username})
             else:
                 userid = user["_id"]
             raise web.seeother("/users/" + str(userid) + "/todos")

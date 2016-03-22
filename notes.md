@@ -10,7 +10,7 @@
 * les 6: gebruikers en todo's
 * les 7: identificatien en authenticatie
 * les 8: (zelf uitwerken: een blog-website)
-* les 9:
+* les 9: (sessions)
 * les 10:
 
 Welke voorbeelden gebruiken we in de verschillende lessen?
@@ -30,6 +30,11 @@ Nog toevoegen:
 
 NB: Les6 is nogal wat complexer dan de lessen daarvoor. De combinatie van gebruikers en todo-lijsten vraagt om nadere uitwerking.
 
-* [ ] klopt de representatie van "done" in de database? De representatie van "True" is een string, zoals deze uit het formulier komt. Deze moet omgezet worden in een Python boolean representatie.
+* [x] klopt de representatie van "done" in de database? De representatie van "True" is een string, zoals deze uit het formulier komt. Deze moet omgezet worden in een Python boolean representatie.
 * [ ] je kunt een Cursor-object maar eenmaal doorlopen: het is geen normale collectie. Moeten we daarom het Cursor-object eerst kopiëren?
 
+Het omzetten van de formulier-representatie van "done" in de Python-representatie:
+
+* de formulier-representatie van True is de aanwezigheid van het naam/waarde-paar: `done=True` in `web.input()`.; de waarde is altijd een string, in dit geval `"True"`. Een andere dan deze string kan, op grond van het formulier, niet voorkomen.
+* de formulier-representatie van False is de *afwezigheid* van `"done"` in de naam/waarde-paren in `web.input()`.
+* we kunnen de formulier-representatie dan omzetten in een boolean waarde met de constructie: `"done" in input.keys()`.
