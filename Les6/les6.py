@@ -66,13 +66,11 @@ class UserTodoElement:
                            "done": data.done,
                            "userid": userid}}
             )
-        print("redirect to: " + "/users/" + userid + "/todos")
         raise web.seeother("/users/" + userid + "/todos")
 
 class UserTodoList:
     def GET(self, userid):
         todos = db.todos.find({"userid": userid})
-        print(str(todos))
         return render.usertodos(userid=userid, todolist=todos)
 
     def POST(self, userid):
