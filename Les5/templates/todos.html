@@ -6,11 +6,11 @@ $def with (todolist)
   <body>
     $for elt in todolist:
       <form action="/todos/$elt['_id']" method="POST">
-       <input type="checkbox" name="done" value="True"
-              $if elt['done']: checked
-              >
-       <input type="text" name="descr" value="$elt['description']">
-       <button type="submit">change</button>
+        <input type="checkbox" name="done" value="True" \
+        $if elt['done']: checked \
+        >
+        <input type="text" name="descr" value="$elt['description']">
+        <button type="submit">change</button>
         <br>
       </form>
     <hr>
@@ -20,5 +20,7 @@ $def with (todolist)
       done: <input type="checkbox" name="done" value="True"> <br>
       <button type="submit">Create</button>
     </form>
+    <hr>
+    <a href="/cleanup">Remove completed items</a>
   </body>
 </html>

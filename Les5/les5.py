@@ -3,11 +3,10 @@ import pymongo
 from bson.objectid import ObjectId
 
 urls = (
-    '/','Index',
-    '/form1','Form1',
-    '/form2', 'Form2',
+    '/', 'Index',
     '/todos', 'TodoList',
-    '/todos/([0-9a-f]+)', 'TodoElement'
+    '/todos/([0-9a-f]+)', 'TodoElement',
+    '/cleanup', 'Cleanup'
 )
 
 app = web.application(urls,globals())
@@ -19,26 +18,8 @@ db = client["tododb"]
 
 class Index:
     def GET(self):
-        user = web.cookies(username="anonymous")
-        return render.index(username=user)
-
-class Form1:
-    def GET(self):
-        input = web.input()
-        return render.form1(method="GET", x=input.x, y=input.y)
-
-    def POST(self):
-        input = web.input()
-        return render.form1(method="POST", x=input.x, y=input.y)
-
-class Form2:
-    def GET(self):
-        return render.form2(method="GET", input=web.input())
-
-    def POST(self):
-        inputx = web.input()
-        print(inputx.keys())
-        return render.form2(method="POST", input=inputx)
+        cookies = web.cookies(username="anonymous")
+        return render.index(username=cookies.username)
 
 class TodoElement:
     def GET(self, id):
@@ -46,16 +27,12 @@ class TodoElement:
 
     def POST(self, id):
         data = web.input()
-        if not ("done" in data.keys()):
-            data["done"] = False
         db.todos.update_one(
                 {"_id": ObjectId(id)},
                 {"$set": {"description": data.descr,
-                           "done": data.done}}
+                           "done": "done" in data.keys()}}
             )
         raise web.seeother("/todos")
-#        todos = db.todos.find()
-#        return render.todos(todolist=todos)
 
 class TodoList:
     def GET(self):
@@ -64,14 +41,16 @@ class TodoList:
 
     def POST(self):
         data = web.input()
-        if not ("done" in data.keys()):
-            data["done"] = False        
         db.todos.insert_one(
-          {"description": data.descr,
-           "done": data.done}
+            {"description": data.descr,
+             "done": "done" in data.keys()}
         )
-        todos = db.todos.find()
-        return render.todos(todolist=todos)
+        raise web.seeother("/todos")
+
+class Cleanup:
+    def GET(self):
+        db.todos.delete_many({"done": True})
+        raise web.seeother("/todos")
 
 if __name__=='__main__':
     app.run()
