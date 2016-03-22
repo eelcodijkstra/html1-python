@@ -29,3 +29,5 @@ Nog toevoegen:
 * afhandelen van statische bestanden; css, enz.
 
 NB: Les6 is nogal wat complexer dan de lessen daarvoor. De combinatie van gebruikers en todo-lijsten vraagt om nadere uitwerking.
+
+* [ ] klopt de representatie van "done" in de database?

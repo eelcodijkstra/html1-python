@@ -5,8 +5,6 @@ from bson.objectid import ObjectId
 urls = (
     '/','Index',
     '/users','Users',
-    '/todos', 'TodoList',
-    '/todos/([0-9a-f]+)', 'TodoElement',
     '/users/([0-9a-f]+)/todos/([0-9a-f]+)', 'UserTodoElement',
     '/users/([0-9a-f]+)/todos', 'UserTodoList'
 )
@@ -54,29 +52,6 @@ class Users:
     def POST(self):
         raise web.seeother("/")
 
-class TodoElement:
-    def GET(self, id):
-        return "GET TodoElement " + str(id)
-
-    def POST(self, id):
-        user = getUser()
-        if user == None:
-            # no user set/logged in, goto home/login page
-            raise web.seeother("/")
-        # now user is a valid document
-        userid = user['_id']
-        data = web.input()
-        if not ("done" in data.keys()):
-            data["done"] = False
-        db.todos.update_one(
-                {"_id": ObjectId(id)},
-                {"$set": {"description": data.descr,
-                           "done": data.done,
-                           "userid": userid}}
-            )
-        print("redirect to: " + "/users/" + userid + "/todos")
-        raise web.seeother("/users/" + userid + "/todos")
-
 class UserTodoElement:
     def GET(self, userid, eltid):
         return "GET TodoElement " + "user=" + str(userid) +"elt=" +str(id)
@@ -110,32 +85,6 @@ class UserTodoList:
            "userid": userid}
         )
         raise web.seeother("/users/" + userid + "/todos")
-
-class TodoList:
-    def GET(self):
-        user = getUser()
-        if user == None: # no user set/logged in, goto home/login page
-            raise web.seeother("/")
-        # user is a valid document
-        todos = db.todos.find({"userid": user['_id']})
-        print(str(todos))
-        return render.todos(username=user['username'], todolist=todos)
-
-    def POST(self):
-        user = getUser()
-        if user == None: # no user set/logged in, goto home/login page
-            raise web.seeother("/")
-        # user is a valid document
-        userid = user["_id"]
-        data = web.input()
-        if not ("done" in data.keys()):
-            data["done"] = False
-        db.todos.insert_one(
-          {"description": data.descr,
-           "done": data.done,
-           "userid": userid}
-        )
-        raise web.seeother("/todos")
 
 if __name__=='__main__':
     app.run()
