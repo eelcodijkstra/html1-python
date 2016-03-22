@@ -1,6 +1,6 @@
 ## Les 3: templates
 
-Een dynamische webpagina is een pagina die door de server aangepast is aan de gebruiker. Deze aanpassing is meestal maar klein: de overeenkomsten tussen de pagina's voor verschillende gebruikers zijn groot. In een template proberen we het gemeenschappelijke onder te brengen. Dit template parametriseren we met de elementen die per gebruiker kunnen verschillen.
+Een dynamische webpagina is een pagina die door de server aangepast is aan de gebruiker. Deze aanpassing is meestal maar klein: de overeenkomsten tussen de pagina's voor verschillende gebruikers zijn groot. In een template proberen we het gemeenschappelijke deel onder te brengen. Dit template parametriseren we met de elementen die per gebruiker kunnen verschillen.
 
 > Een template of sjabloon is een tekst die je kunt parametriseren. De parameters in deze tekst kun je vervangen door andere teksten. Templates kom je op veel verschillende plaatsen tegen:
 
