@@ -53,3 +53,57 @@ We hebben als oefening een eenvoudige webpagina gemaakt met een formulier. De we
 *Opdracht:* breidt de webpagina uit, door een tweede formulier toe te voegen aan deze webpagina.
 
 Merk op: je kunt ook parameters meegeven in een link.
+
+### Afhandeling door de server
+
+In deze lessen geven we een uitwerking van server-side scripting met behulp van Python. Je kunt veel andere talen en systemen gebruiken voor deze server-side scripting, bijvoorbeeld PHP, JavaScript (node.js), Java, Haskell, enz.
+
+Je moet niet alleen een taal kiezen, maar ook een "framework" voor het organiseren van de server-side scripts. We gebruiken hier een eenvoudig Python-framework: *web.py* (zie webpy.org). Andere voorbeelden van Python frameworks voor webservers zijn Django en Flask; deze zijn wat complexer in het gebruik, maar geven meer mogelijkheden. Als je web.py begrijpt, kun je gemakkelijk de overstap naar die andere frameworks maken.
+
+Je moet eerst aangeven dat je `web.py` gebruikt:
+
+```
+import web
+```
+
+Als volgende stap geef je op welke URLs gebruikt worden voor deze toepassing. We gebruiken hier 2 URLS: `"/"`, voor de home-pagina, en `"/form1"`, voor het eerste formulier. Per URL geef je aan door welke class dit afgehandeld wordt (zie verderop). `"/"` wordt afgehandeld door de class met naam `"Index"`, `"/form1"` wordt afgehandeld door de class `"Form1"`.
+
+```
+urls = (
+    '/','Index',
+    '/form1','Form1'
+)
+```
+
+De volgende opdracht start de server-applicatie voor het afhandelen van de binnenkomende http-verzoeken:
+
+```
+app = web.application(urls, globals())
+```
+
+We nemen hier de volledige tekst van de html-pagina met het formulier op als een string in de Python-code. Later zullen we zien dat dit handiger kan:
+
+```
+pageHtml="""
+<!doctype html>
+  ...
+</html>
+"""
+```
+
+Voor het afhandelen van http-verzoeken voor de url "/" gebruiken we de class `Index`. Voor deze URL handelen we alleen GET-verzoeken af. Het resultaat van de functie `GET` is het antwoord op het verzoek (de *response*). In dit geval is dit de html-pagina met het formulier. 
+
+```
+class Index:
+    def GET(self):
+        return pageHtml
+```
+
+Voor het afhandelen van de verzoeken voor de url "/form1" gebruiken we de class `Form1`. Voor deze URL handelen we zowel de GET- als de POST-verzoeken af. In beide gevallen sturen we een simpele string met de ontvangen gegevens terug naar de browser.
+
+Als laatste onderdeel zien we een constructie die je veel tegenkomt in Python: als deze Python-module gebruikt wordt als zelfstandig programma ("main"), dan wordt de functie `app.run()` aangeroepen. Dit gebeurt bijvoorbeeld als je de opdracht geeft: `python les2.py`.
+
+```
+if __name__=='__main__':
+    app.run()
+```
