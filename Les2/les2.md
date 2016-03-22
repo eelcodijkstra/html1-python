@@ -99,7 +99,16 @@ class Index:
         return pageHtml
 ```
 
-Voor het afhandelen van de verzoeken voor de url "/form1" gebruiken we de class `Form1`. Voor deze URL handelen we zowel de GET- als de POST-verzoeken af. In beide gevallen sturen we een simpele string met de ontvangen gegevens terug naar de browser.
+Voor het afhandelen van de verzoeken voor de url "/form1" gebruiken we de class `Form1`. Voor deze URL handelen we zowel de GET- als de POST-verzoeken af. In beide gevallen sturen we een simpele string met de ontvangen gegevens terug naar de browser. Deze ontvangen gegevens kun je opgraven met de functieaanroep `web.input()`.
+
+```
+class Form1:
+    def GET(self):
+        return("GET " + str(web.input()))
+
+    def POST(self):
+        return("POST " + str(web.input()))
+```
 
 Als laatste onderdeel zien we een constructie die je veel tegenkomt in Python: als deze Python-module gebruikt wordt als zelfstandig programma ("main"), dan wordt de functie `app.run()` aangeroepen. Dit gebeurt bijvoorbeeld als je de opdracht geeft: `python les2.py`.
 
