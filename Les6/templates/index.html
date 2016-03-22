@@ -5,11 +5,11 @@ $def with (username, userid)
   </head>
   <body>
     <p>
-      $if username != "anonymous":
+      $if username != "":
           <p>Welkom $username!</p>
           <a href="/users/$userid/todos">Your todo-list</a>
     <form action="/users" method="GET">
-      username: <input type="text" name="username" value=""> <br>
+      Username: <input type="text" name="username" value=""> <br>
       <button type="submit">Submit</button>
     </form>
     <hr>
