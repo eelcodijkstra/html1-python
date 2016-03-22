@@ -14,10 +14,10 @@ Een HTML-document kan meerdere formulieren bevatten.
 We leggen de structuur en werking van een formulier uit aan de hand van een eenvoudig voorbeeld. (We gebruiken hier maar een deel van de mogelijkheden van formulieren.)
 
 ```
-<form action="myform" method="GET">
-  x: <input  type ="number" name="x" value="123">
-  y: <input type="text" name="y" value="hi">
-  <button type="submit">Send</button>
+<form action="/form1" method="GET">
+  x: <input type="text" name="x" value="..."> <br>
+  y: <input type="number" name="y" value="123"> <br>
+  <button type="submit">Submit</button>
 </form>
 ```
 
@@ -34,9 +34,9 @@ De gebruikelijke gang van zaken is:
 2. de gebruiker klikt op de submit-knop
 3. de browser stuurt het formulier op, met de volgende gegevens:
     * request-type: `GET`
-    * url: `myform`
-    * query-parameters: `x=345&y=hallo` (wat de gebruiker ingevuld heeft)
-    * totaal: `GET myformurl?x=345&y=hallo`
+    * url: `/form1`
+    * query-parameters: `x=hallo&y=345` (wat de gebruiker ingevuld heeft)
+    * totaal: `GET /form1?x=hallo&y=345`
 4. de server handelt dit verzoek af, aan de hand van deze gegevens
     * eventueel werkt de server de "persistent state" bij, bijvoorbeeld in een database;
     * de server stuurt een HTML-document als antwoord (response) naar de browser;
