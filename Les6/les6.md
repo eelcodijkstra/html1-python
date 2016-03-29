@@ -4,6 +4,11 @@ In deze les combineren we gebruikers en todo's. We maken het mogelijk dat elke g
 
 > We bouwen nog niet de beveiliging in dat elke gebruiker alleen zijn eigen lijst met todo's mag zien. Dit behandelen we in een latere les.
 
+Een gebruiker geeft zijn naam op via de startpagina. Via een cookie wordt de naam van deze gebruiker bijgehouden, zodat een gebruiker bij een volgend bezoek deze naam niet nogmaals hoeft op te geven. Via de startpagina kan deze naam altijd veranderd worden.
+
+* in de GET-Users functie wordt dit cookie ingevuld, en wordt de gebruiker opgezocht in de database, of eventueel toegevoegd aan de database. Dan is de identificatie van de gebruiker in de database bekend.
+* de andere functies maken gebruik van de identificatie van de gebruiker, in een REST-url.
+
 ### REST urls
 
 In dit geval beschouwen we de lijst met todo's van een gebruiker als een eigenschap van een gebruiker. De URLs voor de todo's hebben daarom de vorm:
