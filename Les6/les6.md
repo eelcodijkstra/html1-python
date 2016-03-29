@@ -8,6 +8,7 @@ Een gebruiker geeft zijn naam op via de startpagina. Via een cookie wordt de naa
 
 * in de GET-Users functie wordt dit cookie ingevuld, en wordt de gebruiker opgezocht in de database, of eventueel toegevoegd aan de database. Dan is de identificatie van de gebruiker in de database bekend.
 * de andere functies maken gebruik van de identificatie van de gebruiker, in een REST-url.
+* invariant: als de naam van de gebruiker in het username-cookie ingevuld is, dan is deze naam ook bekend in de database, en kan de identificatie van de gebruiker in de database opgezocht worden.
 
 ### REST urls
 
