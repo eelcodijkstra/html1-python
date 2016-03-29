@@ -8,7 +8,7 @@
 * les 4: gebruikers (en cookies)
 * les 5: databases, todo's, 
 * les 6: gebruikers en todo's
-* les 7: identificatien en authenticatie
+* les 7: identificatie en authenticatie
 * les 8: (zelf uitwerken: een blog-website)
 * les 9: (sessions)
 * les 10:
