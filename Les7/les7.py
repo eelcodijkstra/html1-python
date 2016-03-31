@@ -1,6 +1,7 @@
 import web
 import pymongo
 from bson.objectid import ObjectId
+import time
 
 urls = (
     '/','Index',
@@ -17,24 +18,42 @@ render = web.template.render('templates/')
 client = pymongo.MongoClient()
 db = client["tododb"]
 
+
+def startSession(userid):
+    sessionid = db.sessions.insert_one({
+            "userid": userid,
+            "startTime": int(time.time()) # secs since Epoch
+        }).inserted_id
+    return sessionid
+
+def endSession(sessionid):
+    session = db.sessions.find_one({"_id": sessionid})
+    return 0
+
 class Index:
     def GET(self):
-        cookies = web.cookies(username="")
-        username = cookies.username
-        if username == "":
+        cookies = web.cookies(username="", sessionid="")
+        sessionid = cookies.sessionid
+        if sessionid == "":
             return render.index(username = "", userid = 0)
-        else:
-            user = db.users.find_one({"username": username})
-            return render.index(username=user["username"], userid=user["_id"])
+        print("sessionid:" + sessionid)
+        session = db.sessions.find_one({"_id": ObjectId(sessionid)})
+        print("session: " + str(session))
+        user = db.users.find_one({"_id": session["userid"]})
+        return render.index(username=user["username"], userid=user["_id"])
 
 class Login:
     def GET(self):
         data = web.input()
-        if not "username" in data.keys() or data.username == "":
-          return render.login()
-        else:
-          # check password
-          return "checking password: " + data.username + ":" + data.password
+        if not "username" in data.keys() or data.username == "" or \
+           not "password" in data.keys() or data.password == "":
+            return render.login()
+        user = db.users.find_one({"username": data.username})
+        if user == None or user["password"] != data.password:
+            return render.login()
+        sessionid = startSession(user["_id"])
+        web.setcookie("sessionid", sessionid)
+        return render.index(username=data.username, userid=user["_id"])
 
 class Users:
     def GET(self):
