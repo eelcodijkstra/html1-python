@@ -132,3 +132,13 @@ In het geval van MongoDB kunnen we dit op verschillende manieren oplossen:
 
 Er is een verschil tussen de string-waarde en de ObjectId-waarde. We moeten op sommige plaatsen expliciet een `ObjectId`-functie gebruiken voor de type-conversie.
 Als we direct een element uit een MongoDB-document gebruiken gaat dit goed, maar zodra dit naar een string omgezet wordt - bijvoorbeeld via een html-pagina - gaat dit mis.
+
+### Uitloggen
+
+We moeten ook nog een opdracht toevoegen om uit te loggen.
+
+### Gebruikers en REST
+
+* hoe past het inloggen e.d. bij een REST interface?
+* hoe kun je een API maken met een redelijke beveiliging?
+

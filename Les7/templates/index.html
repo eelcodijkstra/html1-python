@@ -8,10 +8,9 @@ $def with (username, userid)
       $if username != "":
           <p>Welkom $username!</p>
           <a href="/users/$userid/todos">Your todo-list</a>
-    <form action="/users" method="GET">
-      Username: <input type="text" name="username" value=""> <br>
-      <button type="submit">Submit</button>
-    </form>
+      $else:
+          <p><a href="/login">Please login</a></p>
     <hr>
+    <p>Andere gebruiker: <a href="/login">login</a></p>
   </body>
 </html>
