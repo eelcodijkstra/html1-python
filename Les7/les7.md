@@ -135,8 +135,10 @@ Als we direct een element uit een MongoDB-document gebruiken gaat dit goed, maar
 
 ### Uitloggen
 
-We moeten ook nog een opdracht toevoegen om uit te loggen.
+We moeten ook nog een opdracht toevoegen om uit te loggen. Gebruiken we daarvoor een aparte pagina, of alleen een apart formulier?
 
+NB: logout is (net als login) een idempotente operatie: we kunnen daarvoor een GET gebruiken.
+ 
 ### Gebruikers en REST
 
 * hoe past het inloggen e.d. bij een REST interface?
