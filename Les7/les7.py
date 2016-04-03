@@ -6,6 +6,7 @@ import time
 urls = (
     '/','Index',
     '/login', 'Login',
+    '/logout', 'Logout',
     '/users','Users',
     '/users/([0-9a-f]+)/todos/([0-9a-f]+)', 'UserTodoElement',
     '/users/([0-9a-f]+)/todos', 'UserTodoList'
@@ -54,6 +55,16 @@ class Login:
         sessionid = startSession(user["_id"])
         web.setcookie("sessionid", sessionid)
         return render.index(username=data.username, userid=user["_id"])
+
+class Logout:
+    def GET(self):
+        cookies = web.cookies(sessionid="")
+        sessionid = cookies.sessionid
+        if sessionid == "":
+            return render.index(username="", userid=0)
+        db.sessions.delete_one({"_id": ObjectId(sessionid)})
+        web.setcookie("sessionid", "")
+        return render.index(username="", userid=0)
 
 class Users:
     def GET(self):
