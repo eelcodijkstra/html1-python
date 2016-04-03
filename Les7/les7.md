@@ -128,6 +128,8 @@ In het geval van MongoDB kunnen we dit op verschillende manieren oplossen:
 * we kunnen met een afzonderlijke toepassing ("update") de structuur van de database aanpassen volgens de nieuwe situatie;
 * we kunnen in de toepassing zelf rekening houden met oude en nieuwe "record" (documenten) in de database.
 
+Als je de database niet aanpast aan de nieuwe situatie, kun je er niet op rekenen dat bepaalde eigenschappen ("keys" in Python dictionaries) bestaan. Dit geeft een key error als je deze toch gebruikt. (Bijv.: een gebruiker zonder wachtwoord.)
+
 ### Gebruik van ObjectId
 
 Er is een verschil tussen de string-waarde en de ObjectId-waarde. We moeten op sommige plaatsen expliciet een `ObjectId`-functie gebruiken voor de type-conversie.
@@ -135,12 +137,15 @@ Als we direct een element uit een MongoDB-document gebruiken gaat dit goed, maar
 
 ### Uitloggen
 
-We moeten ook nog een opdracht toevoegen om uit te loggen. Gebruiken we daarvoor een aparte pagina, of alleen een apart formulier?
+De operatie om uit te loggen kan uit een enkele link (of button) bestaan. We gebruiken hiervoor een aparte URL.
 
-NB: logout is (net als login) een idempotente operatie: we kunnen daarvoor een GET gebruiken.
+NB: logout is (net als login) een idempotente operatie: we gebruiken daarom een GET operatie.
  
 ### Gebruikers en REST
 
 * hoe past het inloggen e.d. bij een REST interface?
 * hoe kun je een API maken met een redelijke beveiliging?
 
+### OAuth enz.
+
+We kunnen ook gebruik maken van de authenticatie van "elders", bijvoorbeeld Google of Firefox.

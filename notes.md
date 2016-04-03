@@ -35,6 +35,6 @@ NB: Les6 is nogal wat complexer dan de lessen daarvoor. De combinatie van gebrui
 
 Het omzetten van de formulier-representatie van "done" in de Python-representatie:
 
-* de formulier-representatie van True is de aanwezigheid van het naam/waarde-paar: `done=True` in `web.input()`.; de waarde is altijd een string, in dit geval `"True"`. Een andere dan deze string kan, op grond van het formulier, niet voorkomen.
+* de formulier-representatie van True is de aanwezigheid van het naam/waarde-paar: `done==True` in `web.input()`.; de waarde is altijd een string, in dit geval `"True"`. Een andere dan deze string kan op grond van het formulier niet voorkomen. (Maar: je kunt in principe nooit vertrouwen op de input van de browser. Een URL kan in elke willekeurige vorm aangemaakt worden.)
 * de formulier-representatie van False is de *afwezigheid* van `"done"` in de naam/waarde-paren in `web.input()`.
 * we kunnen de formulier-representatie dan omzetten in een boolean waarde met de constructie: `"done" in input.keys()`.
